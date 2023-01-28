@@ -1,4 +1,4 @@
-import { Component, BaseComponent } from '../component.js';
+import { Component, BaseComponent } from "../component.js";
 
 export interface Composable {
   addChild(child: Component): void;
@@ -14,10 +14,7 @@ type SectionContainerConstructor = {
   new (): SectionContainer;
 };
 
-export class PageItemComponent
-  extends BaseComponent<HTMLElement>
-  implements SectionContainer
-{
+export class PageItemComponent extends BaseComponent<HTMLElement> implements SectionContainer {
   private closeListener?: onCloseListener;
   constructor() {
     super(`
@@ -28,15 +25,13 @@ export class PageItemComponent
       </div>
     </li>
   `);
-    const closeBtn = this.element.querySelector('.close')! as HTMLButtonElement;
+    const closeBtn = this.element.querySelector(".close")! as HTMLButtonElement;
     closeBtn.onclick = () => {
       this.closeListener && this.closeListener();
     };
   }
   addChild(child: Component) {
-    const container = this.element.querySelector(
-      '.page_item_body'
-    )! as HTMLElement;
+    const container = this.element.querySelector(".page_item_body")! as HTMLElement;
     child.attachTo(container);
   }
 
@@ -45,10 +40,7 @@ export class PageItemComponent
   }
 }
 
-export class PageComponent
-  extends BaseComponent<HTMLUListElement>
-  implements Composable
-{
+export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable {
   constructor(private PageItemConstructor: SectionContainerConstructor) {
     super('<ul class="page">This is Page Components!</ul>');
   }
@@ -56,7 +48,7 @@ export class PageComponent
   addChild(section: Component) {
     const item = new this.PageItemConstructor();
     item.addChild(section);
-    item.attachTo(this.element, 'beforeend');
+    item.attachTo(this.element, "beforeend");
     item.setOnCloseListener(() => {
       item.removeFrom(this.element);
     });
