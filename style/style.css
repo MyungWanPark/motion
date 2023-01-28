@@ -26,6 +26,19 @@ label {
   color: var(--text-accent-color);
 }
 
+button {
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+input,
+textarea {
+  background-color: var(--text-edit-bg-color);
+  color: var(--smokyWhite);
+  font-size: 1.5rem;
+}
+
 dialog {
   border: 0;
 }
@@ -71,6 +84,7 @@ body {
   align-items: center;
 }
 
+.dialog_submit,
 .create_btn {
   margin: 0.1rem 0.2rem;
   text-align: center;
@@ -137,4 +151,95 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   box-shadow: 2px 2px 20px var(--shadow-color);
+}
+
+.form_container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.close {
+  align-self: flex-end;
+  padding: 0.2rem;
+  color: var(--accent-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.2rem;
+  transition: all 250ms ease;
+}
+
+.close:hover,
+.close:focus {
+  transform: scale(1.5);
+  color: var(--shadow-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dialog_submit {
+  align-self: flex-end;
+  padding: 0.5rem 1.5rem;
+}
+
+/* --PAGE ITEM -- */
+.page_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem;
+  box-shadow: 2px 2px 6px var(--shadow-color);
+  background-color: var(--component-bg-gradient);
+}
+
+.page_item_btn {
+  padding-right: 0.5rem;
+}
+
+.page-item_title {
+  color: var(--text-accent-color);
+}
+
+.page_item_body {
+  width: 100%;
+}
+
+/* --Image & Video -- */
+.video,
+.image {
+  display: flex;
+  width: 100%;
+  height: 15rem;
+}
+
+.image_holder,
+.video_container {
+  flex: 60% 1 1;
+}
+
+.image_title,
+.video_title {
+  flex: 40% 1 1;
+  margin-left: 0.5rem;
+}
+
+.video_iframe {
+  border: none;
+}
+
+.video_iframe,
+.image_thumbnail {
+  width: 100%;
+  height: 100%;
+}
+
+/* --Note & Todo */
+.note,
+.todo {
+  padding: 0.5rem;
+}
+
+.todo-label {
+  padding: 1rem;
+  color: var(--smokyWhite);
 }

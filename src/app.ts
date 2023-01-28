@@ -60,8 +60,8 @@ class App {
       });
 
       dialog.setOnSubmitListener(() => {
-        const image = makeSection(inputSection);
-        this.page.addChild(image);
+        const inputData = makeSection(inputSection);
+        this.page.addChild(inputData);
         dialog.removeFrom(this.dialogRoot);
       });
     });

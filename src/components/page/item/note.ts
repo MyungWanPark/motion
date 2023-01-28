@@ -4,7 +4,7 @@ export class NoteComponet extends BaseComponent<HTMLElement> {
   constructor(title: string, body: string) {
     super(`
     <section class="note">
-      <h2 class="note_title"></h2>
+      <h2 class="page-item_title note_title"></h2>
       <p class="note_body"></p>
     </section>
   `);

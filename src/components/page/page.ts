@@ -42,7 +42,7 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
 
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable {
   constructor(private PageItemConstructor: SectionContainerConstructor) {
-    super('<ul class="page">This is Page Components!</ul>');
+    super('<ul class="page"></ul>');
   }
 
   addChild(section: Component) {
