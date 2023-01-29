@@ -11,6 +11,8 @@ type onDragStateListener<T extends Component> = (target: T, state: DragState) =>
 interface SectionContainer extends Component, Composable {
   setOnCloseListener: (listener: onCloseListener) => void;
   setOnDragStateListener: (listener: onDragStateListener<SectionContainer>) => void;
+  muteChildren: () => void;
+  unmuteChildren: () => void;
 }
 
 type SectionContainerConstructor = {
@@ -79,9 +81,20 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
   setOnDragStateListener(listener: onDragStateListener<PageItemComponent>) {
     this.dragStateListener = listener;
   }
+
+  muteChildren() {
+    this.element.classList.add("mute-children");
+  }
+
+  unmuteChildren() {
+    this.element.classList.remove("mute-children");
+  }
 }
 
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable {
+  private draggedTarget?: SectionContainer;
+  private droppedTarget?: SectionContainer;
+  private children = new Set<SectionContainer>();
   constructor(private PageItemConstructor: SectionContainerConstructor) {
     super('<ul class="page"></ul>');
     this.element.addEventListener("dragover", (e: DragEvent) => {
@@ -94,23 +107,59 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
-    console.log("drag over");
   }
 
   onDrop(event: DragEvent) {
     event.preventDefault();
-    console.log("drop");
+    if (!this.droppedTarget) {
+      return;
+    }
+    if (this.draggedTarget && this.droppedTarget !== this.draggedTarget) {
+      this.draggedTarget.removeFrom(this.element);
+      this.droppedTarget.attach(this.draggedTarget, "beforebegin");
+    }
   }
 
   addChild(section: Component) {
     const item = new this.PageItemConstructor();
     item.addChild(section);
     item.attachTo(this.element, "beforeend");
+    this.children.add(item);
     item.setOnCloseListener(() => {
       item.removeFrom(this.element);
+      this.children.delete(item);
     });
-    item.setOnDragStateListener((target: PageItemComponent, state) => {
-      console.log(target, state);
+    item.setOnDragStateListener((target: SectionContainer, state) => {
+      switch (state) {
+        case "start":
+          this.draggedTarget = item;
+          this.muteSectionsChildren();
+          break;
+        case "end":
+          this.draggedTarget = undefined;
+          this.unmuteSectionsChildren();
+          break;
+        case "enter":
+          console.log("entered!");
+          this.droppedTarget = target;
+          break;
+        case "leave":
+          this.droppedTarget = undefined;
+          break;
+        default:
+          throw new Error(`drag state ${state} is not supported`);
+      }
+    });
+  }
+  muteSectionsChildren() {
+    this.children.forEach((section: SectionContainer) => {
+      section.muteChildren();
+    });
+  }
+
+  unmuteSectionsChildren() {
+    this.children.forEach((section: SectionContainer) => {
+      section.unmuteChildren();
     });
   }
 }
