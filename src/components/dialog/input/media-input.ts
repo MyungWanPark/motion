@@ -1,5 +1,5 @@
-import { MediaData } from "./../dialog.js";
-import { BaseComponent } from "./../../component.js";
+import { MediaData } from './../dialog.js';
+import { BaseComponent } from './../../component.js';
 
 export class MediaSectionInput extends BaseComponent<HTMLElement> implements MediaData {
   constructor() {
@@ -18,12 +18,12 @@ export class MediaSectionInput extends BaseComponent<HTMLElement> implements Med
   }
 
   get title(): string {
-    const titleElement = this.element.querySelector("#title")! as HTMLInputElement;
+    const titleElement = this.element.querySelector('#title')! as HTMLInputElement;
     return titleElement.value;
   }
 
   get url(): string {
-    const urlElement = this.element.querySelector("#url")! as HTMLInputElement;
+    const urlElement = this.element.querySelector('#url')! as HTMLInputElement;
     return urlElement.value;
   }
 }

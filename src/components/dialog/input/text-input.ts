@@ -1,5 +1,5 @@
-import { TextData } from "./../dialog.js";
-import { BaseComponent } from "./../../component.js";
+import { TextData } from './../dialog.js';
+import { BaseComponent } from './../../component.js';
 
 export class TextSectionInput extends BaseComponent<HTMLElement> implements TextData {
   constructor() {
@@ -18,12 +18,12 @@ export class TextSectionInput extends BaseComponent<HTMLElement> implements Text
   }
 
   get title(): string {
-    const titleElement = this.element.querySelector("#title")! as HTMLInputElement;
+    const titleElement = this.element.querySelector('#title')! as HTMLInputElement;
     return titleElement.value;
   }
 
   get text(): string {
-    const textareaElement = this.element.querySelector("#text_body")! as HTMLTextAreaElement;
+    const textareaElement = this.element.querySelector('#text_body')! as HTMLTextAreaElement;
     return textareaElement.value;
   }
 }

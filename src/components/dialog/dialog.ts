@@ -1,5 +1,5 @@
-import { Composable } from "./../page/page.js";
-import { BaseComponent, Component } from "./../component.js";
+import { Composable } from './../page/page.js';
+import { BaseComponent, Component } from './../component.js';
 
 type OnCloseListener = () => void;
 type OnSubmitListener = () => void;
@@ -28,13 +28,13 @@ export class InputDialog extends BaseComponent<HTMLElement> implements Composabl
       </div>
     </dialog>
     `);
-    const closeBtn = this.element.querySelector(".close")! as HTMLButtonElement;
-    closeBtn.addEventListener("click", () => {
+    const closeBtn = this.element.querySelector('.close')! as HTMLButtonElement;
+    closeBtn.addEventListener('click', () => {
       this.closeListener && this.closeListener();
     });
 
-    const submitBtn = this.element.querySelector(".dialog_submit")! as HTMLButtonElement;
-    submitBtn.addEventListener("click", () => {
+    const submitBtn = this.element.querySelector('.dialog_submit')! as HTMLButtonElement;
+    submitBtn.addEventListener('click', () => {
       this.submitListener && this.submitListener();
     });
   }
@@ -48,7 +48,7 @@ export class InputDialog extends BaseComponent<HTMLElement> implements Composabl
   }
 
   addChild(child: Component): void {
-    const dialogBody = this.element.querySelector("#dialog_body")! as HTMLDivElement;
+    const dialogBody = this.element.querySelector('#dialog_body')! as HTMLDivElement;
     child.attachTo(dialogBody);
   }
 }
