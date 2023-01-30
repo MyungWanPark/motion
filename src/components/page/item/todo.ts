@@ -1,4 +1,4 @@
-import { BaseComponent } from "../../component.js";
+import { BaseComponent } from '../../component.js';
 
 export class TodoComponet extends BaseComponent<HTMLElement> {
   constructor(title: string, todo: string) {
@@ -10,10 +10,10 @@ export class TodoComponet extends BaseComponent<HTMLElement> {
     </section>
     `);
 
-    const titleElement = this.element.querySelector(".todo_title")! as HTMLHeadElement;
+    const titleElement = this.element.querySelector('.todo_title')! as HTMLHeadElement;
     titleElement.textContent = title;
 
-    const todoElement = this.element.querySelector(".todo_label")! as HTMLLabelElement;
+    const todoElement = this.element.querySelector('.todo_label')! as HTMLLabelElement;
     todoElement.textContent = todo;
   }
 }
